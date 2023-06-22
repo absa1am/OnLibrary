@@ -2,9 +2,10 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using OnLibrary.Web.Data;
+using OnLibrary.Persistence;
 using Serilog;
 using Serilog.Events;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +18,17 @@ builder.Host.UseSerilog((context, config) => config
 
 try
 {
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    var migrationAssembly = Assembly.GetExecutingAssembly().FullName;
+
     // Autofac configuration for dependency injection
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
     builder.Host.ConfigureContainer<ContainerBuilder>(cotainerBuilder =>
     {
-
+        cotainerBuilder.RegisterModule(new PersistenceModule(connectionString, migrationAssembly));
     });
 
     // Add services to the container.
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(connectionString));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
