@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using OnLibrary.Application;
 
 namespace OnLibrary.Persistence
 {
@@ -24,6 +25,10 @@ namespace OnLibrary.Persistence
                 .As<IApplicationDbContext>()
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssembly", _migrationAssembly)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ApplicationUnitOfWork>()
+                .As<IApplicationUnitOfWork>()
                 .InstancePerLifetimeScope();
         }
     }
