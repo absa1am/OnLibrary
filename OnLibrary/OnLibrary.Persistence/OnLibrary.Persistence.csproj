@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnLibrary.Application\OnLibrary.Application.csproj" />
     <ProjectReference Include="..\OnLibrary.Domain\OnLibrary.Domain.csproj" />
   </ItemGroup>
 
