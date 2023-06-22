@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using OnLibrary.Persistence.Features.Membership;
 
 namespace OnLibrary.Persistence.Extensions
 {
@@ -7,8 +8,12 @@ namespace OnLibrary.Persistence.Extensions
     {
         public static void AddIdentity(this IServiceCollection service)
         {
-            service.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            service.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserManager<ApplicationUserManager>()
+                .AddRoleManager<ApplicationRoleManager>()
+                .AddSignInManager<ApplicationSignInManager>()
+                .AddDefaultTokenProviders();
         }
     }
 }
