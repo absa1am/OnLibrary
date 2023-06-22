@@ -1,8 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnLibrary.Persistence;
+using OnLibrary.Persistence.Extensions;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -29,12 +29,9 @@ try
     });
 
     // Add services to the container.
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+    builder.Services.AddIdentity();
     builder.Services.AddControllersWithViews();
 
     var app = builder.Build();
