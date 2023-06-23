@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OnLibrary.Persistence.Features.Membership;
 
 namespace OnLibrary.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser,
+        ApplicationRole, Guid, ApplicationUserClaim, ApplicationUserRole,
+        ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationDbContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssembly;
