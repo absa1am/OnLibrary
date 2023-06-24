@@ -8,6 +8,7 @@ namespace OnLibrary.Web
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<RegisterModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<LoginModel>().AsSelf().InstancePerLifetimeScope();
         }
     }
 }
