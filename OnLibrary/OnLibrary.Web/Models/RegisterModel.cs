@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnLibrary.Web.Models
 {
@@ -21,7 +20,6 @@ namespace OnLibrary.Web.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string ReturnUrl { get; set; }
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }

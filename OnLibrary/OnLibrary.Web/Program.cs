@@ -3,6 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using OnLibrary.Persistence;
 using OnLibrary.Persistence.Extensions;
+using OnLibrary.Web;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -23,9 +24,10 @@ try
 
     // Autofac configuration for dependency injection
     builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-    builder.Host.ConfigureContainer<ContainerBuilder>(cotainerBuilder =>
+    builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
-        cotainerBuilder.RegisterModule(new PersistenceModule(connectionString, migrationAssembly));
+        containerBuilder.RegisterModule(new PersistenceModule(connectionString, migrationAssembly));
+        containerBuilder.RegisterModule(new WebModule());
     });
 
     // Add services to the container.

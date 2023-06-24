@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using OnLibrary.Web.Models;
 
 namespace OnLibrary.Web
 {
@@ -6,7 +7,7 @@ namespace OnLibrary.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
-            base.Load(builder);
+            builder.RegisterType<RegisterModel>().AsSelf().InstancePerLifetimeScope();
         }
     }
 }
