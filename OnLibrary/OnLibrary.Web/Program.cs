@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using OnLibrary.Infrastructure;
 using OnLibrary.Persistence;
 using OnLibrary.Persistence.Extensions;
 using OnLibrary.Web;
@@ -27,13 +28,14 @@ try
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
         containerBuilder.RegisterModule(new PersistenceModule(connectionString, migrationAssembly));
+        containerBuilder.RegisterModule(new InfrastructureModule());
         containerBuilder.RegisterModule(new WebModule());
     });
 
     // Add services to the container.
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-    builder.Services.AddIdentity();
+    builder.Services.AddIdentity(connectionString);
     builder.Services.AddControllersWithViews();
 
     var app = builder.Build();

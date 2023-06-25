@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnLibrary.Infrastructure\OnLibrary.Infrastructure.csproj" />
     <ProjectReference Include="..\OnLibrary.Persistence\OnLibrary.Persistence.csproj" />
   </ItemGroup>
 
