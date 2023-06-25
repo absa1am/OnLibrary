@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OnLibrary.Persistence.Features.Membership;
 
@@ -8,8 +10,10 @@ namespace OnLibrary.Persistence.Extensions
 {
     public static class ServiceCollectionExtension
     {
-        public static void AddIdentity(this IServiceCollection service)
+        public static void AddIdentity(this IServiceCollection service, string connectionString)
         {
+            service.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
             service.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddUserManager<ApplicationUserManager>()
