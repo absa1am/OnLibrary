@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OnLibrary.Domain.Entities;
 using OnLibrary.Persistence.Features.Membership;
 
 namespace OnLibrary.Persistence
@@ -24,5 +25,7 @@ namespace OnLibrary.Persistence
                 optionsBuilder.UseSqlServer(_connectionString, option => option.MigrationsAssembly(_migrationAssembly));
             }
         }
+
+        public DbSet<Publication> Publications { get; set; }
     }
 }

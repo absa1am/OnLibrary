@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using OnLibrary.Application;
+using OnLibrary.Application.Features.Publications.Repositories;
+using OnLibrary.Persistence.Features.Publications.Repositories;
 
 namespace OnLibrary.Persistence
 {
@@ -29,6 +31,10 @@ namespace OnLibrary.Persistence
 
             builder.RegisterType<ApplicationUnitOfWork>()
                 .As<IApplicationUnitOfWork>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<PublicationRepository>()
+                .As<IPublicationRepository>()
                 .InstancePerLifetimeScope();
         }
     }
