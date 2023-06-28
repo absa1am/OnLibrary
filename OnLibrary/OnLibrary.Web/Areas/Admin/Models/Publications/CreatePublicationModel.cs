@@ -12,6 +12,9 @@ namespace OnLibrary.Web.Areas.Admin.Models.Publications
         [Required]
         [DisplayName("Publication Name")]
         public string Name { get; set; }
+        [Required, EmailAddress]
+        [DisplayName("Email Address")]
+        public string Email { get; set; }
 
         public CreatePublicationModel() { }
 
@@ -28,7 +31,7 @@ namespace OnLibrary.Web.Areas.Admin.Models.Publications
         internal void CreatePublication()
         {
             if (!string.IsNullOrWhiteSpace(Name))
-                _publicationService.CreatePublication(Name);
+                _publicationService.CreatePublication(Name, Email);
         }
     }
 }

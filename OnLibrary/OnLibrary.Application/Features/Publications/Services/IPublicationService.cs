@@ -2,6 +2,6 @@
 {
     public interface IPublicationService
     {
-        void CreatePublication(string name);
+        void CreatePublication(string name, string email);
     }
 }

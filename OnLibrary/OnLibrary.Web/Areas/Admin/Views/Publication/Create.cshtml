@@ -25,6 +25,12 @@
                                 <input type="text" name="name" class="form-control" placeholder="Enter publication name">
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
+
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input type="email" name="email" class="form-control" placeholder="Enter email address">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

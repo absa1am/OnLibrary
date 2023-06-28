@@ -13,12 +13,12 @@ namespace OnLibrary.Infrastructure.Features.Publications.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void CreatePublication(string name)
+        public void CreatePublication(string name, string email)
         {
             if (_unitOfWork.Publications.IsDuplicateName(null, name))
                 throw new Exception($"Publication name already exist.");
 
-            var publication = new Publication { Name = name };
+            var publication = new Publication { Name = name, Email = email };
 
             _unitOfWork.Publications.Add(publication);
             _unitOfWork.Save();
