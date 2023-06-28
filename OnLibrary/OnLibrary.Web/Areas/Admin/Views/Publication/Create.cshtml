@@ -11,7 +11,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <!-- jquery validation -->
-                <div class="card card-primary">
+                <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Add Publication</h3>
                     </div>
@@ -19,6 +19,7 @@
                     <!-- form start -->
                     <form id="quickForm" asp-antiforgery="true" asp-area="Admin" asp-controller="Publication" asp-action="Create" method="post">
                         <div class="card-body">
+                            <partial name="_ResponseSweetAlertPartial" />
                             <div class="form-group">
                                 <label asp-for="Name"></label>
                                 <input type="text" name="name" class="form-control" placeholder="Enter publication name">
@@ -27,7 +28,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Add Publication</button>
+                            <button type="submit" class="btn btn-secondary">Add Publication</button>
                         </div>
                     </form>
                 </div>

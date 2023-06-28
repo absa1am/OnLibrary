@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnLibrary.Web.Areas.Admin.Models.Publications;
+using OnLibrary.Web.Models;
+using OnLibrary.Web.TempData;
 
 namespace OnLibrary.Web.Areas.Admin.Controllers
 {
@@ -41,11 +43,23 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
                 {
                     model.CreatePublication();
 
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Publication created to the database.",
+                        Type = ResponseType.Success
+                    });
+
                     return RedirectToAction("Index");
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, "Unable to create publication.");
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Unable to create publication.",
+                        Type = ResponseType.Danger
+                    });
                 }
             }
 
