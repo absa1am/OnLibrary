@@ -1,0 +1,10 @@
+﻿@using OnLibrary.Web.TempData
+
+@if (TempData.Peek<ResponseModel>("Message") != null)
+{
+    var response = TempData.Get<ResponseModel>("Message");
+
+    <button type="button" class="btn btn-@response.Type.ToString().ToLower()">
+        @response.Message
+    </button>
+}
