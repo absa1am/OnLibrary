@@ -1,6 +1,10 @@
 ﻿using Autofac;
 using OnLibrary.Application;
+using OnLibrary.Application.Features.Authors.Repositories;
+using OnLibrary.Application.Features.Books.Repositories;
 using OnLibrary.Application.Features.Publications.Repositories;
+using OnLibrary.Persistence.Features.Authors.Repositories;
+using OnLibrary.Persistence.Features.Books.Repositories;
 using OnLibrary.Persistence.Features.Publications.Repositories;
 
 namespace OnLibrary.Persistence
@@ -31,6 +35,14 @@ namespace OnLibrary.Persistence
 
             builder.RegisterType<ApplicationUnitOfWork>()
                 .As<IApplicationUnitOfWork>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<BookRepository>()
+                .As<IBookRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<AuthorRepository>()
+                .As<IAuthorRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<PublicationRepository>()
