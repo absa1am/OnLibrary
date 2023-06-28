@@ -10,5 +10,15 @@ namespace OnLibrary.Persistence.Features.Publications.Repositories
         {
 
         }
+
+        public bool IsDuplicateName(Guid? id, string name)
+        {
+            int? records = null;
+
+            if (id.HasValue) records = Count(p => p.Id == id.Value && p.Name == name);
+            else records = Count(p => p.Name == name);
+
+            return records > 0;
+        }
     }
 }

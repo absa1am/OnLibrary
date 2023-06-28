@@ -1,0 +1,45 @@
+﻿@model CreatePublicationModel
+
+@{
+    ViewData["Title"] = "Add Publication";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Publication</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="quickForm" asp-antiforgery="true" asp-area="Admin" asp-controller="Publication" asp-action="Create" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter publication name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Add Publication</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
