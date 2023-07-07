@@ -2,6 +2,7 @@
 using OnLibrary.Web.Areas.Admin.Models.Authors;
 using OnLibrary.Web.Areas.Admin.Models.Books;
 using OnLibrary.Web.Areas.Admin.Models.Publications;
+using OnLibrary.Web.Areas.Admin.Models.Roles;
 using OnLibrary.Web.Models;
 
 namespace OnLibrary.Web
@@ -10,8 +11,13 @@ namespace OnLibrary.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // Login - Registration
             builder.RegisterType<RegisterModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<LoginModel>().AsSelf().InstancePerLifetimeScope();
+
+            // Role
+            builder.RegisterType<CreateRoleModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<RoleViewModel>().AsSelf().InstancePerLifetimeScope();
 
             // Book
             builder.RegisterType<CreateBookModel>().AsSelf().InstancePerLifetimeScope();

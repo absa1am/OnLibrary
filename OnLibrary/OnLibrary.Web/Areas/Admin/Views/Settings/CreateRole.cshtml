@@ -1,0 +1,46 @@
+﻿@model CreateRoleModel
+
+@{
+    ViewData["Title"] = "Add Role";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <!-- jquery validation -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Role</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="quickForm" asp-antiforgery="true" asp-area="Admin" asp-controller="Settings" asp-action="CreateRole" method="post">
+                        <div class="card-body">
+                            <partial name="_ResponseSweetAlertPartial" />
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter role name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-secondary">Add Role</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
