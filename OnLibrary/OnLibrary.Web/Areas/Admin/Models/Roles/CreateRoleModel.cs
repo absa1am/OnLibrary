@@ -10,8 +10,8 @@ namespace OnLibrary.Web.Areas.Admin.Models.Roles
         [Required]
         public string Name { get; set; }
 
-        private RoleManager<ApplicationRole> _roleManager { get; set; }
-        private UserManager<ApplicationUser> _userManager { get; set; }
+        private RoleManager<ApplicationRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
 
         public CreateRoleModel() { }
 

@@ -17,7 +17,8 @@ namespace OnLibrary.Web
 
             // Role
             builder.RegisterType<CreateRoleModel>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<RoleViewModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<AssignRoleModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ViewRoleModel>().AsSelf().InstancePerLifetimeScope();
 
             // Book
             builder.RegisterType<CreateBookModel>().AsSelf().InstancePerLifetimeScope();

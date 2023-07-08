@@ -41,5 +41,27 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Roles));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignRole()
+        {
+            var model = _scope.Resolve<AssignRoleModel>();
+
+            await model.LoadData();
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> AssignRole(AssignRoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ResolveDependency(_scope);
+                await model.AssignRole();
+            }
+
+            return RedirectToAction(nameof(Roles));
+        }
     }
 }
