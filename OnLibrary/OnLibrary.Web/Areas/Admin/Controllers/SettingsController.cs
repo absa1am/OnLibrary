@@ -17,12 +17,13 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Roles()
         {
             return View();
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRole()
         {
             var model = _scope.Resolve<CreateRoleModel>();
@@ -30,7 +31,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateRole(CreateRoleModel model)
         {
             if (ModelState.IsValid)
@@ -42,7 +43,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Roles));
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignRole()
         {
             var model = _scope.Resolve<AssignRoleModel>();
@@ -52,7 +53,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignRole(AssignRoleModel model)
         {
             if (ModelState.IsValid)
