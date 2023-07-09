@@ -18,9 +18,11 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Roles()
+        public async Task<IActionResult> Roles()
         {
-            return View();
+            var model = _scope.Resolve<ViewRoleModel>();
+
+            return View(model);
         }
 
         [HttpGet, Authorize(Roles = "Admin")]
