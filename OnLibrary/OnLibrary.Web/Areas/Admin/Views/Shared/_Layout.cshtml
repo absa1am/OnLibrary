@@ -72,6 +72,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- End Level two -->
                             </ul>
                         </li>
+
+                        <!-- Menu for Settings -->
+                        <li class="nav-item dropdown">
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Settings</a>
+                            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                                <!-- End Level two -->
+                                <!-- Level two dropdown-->
+                                <li class="dropdown-submenu dropdown-hover">
+                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Manage Role</a>
+                                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="Roles" class="dropdown-item">View Roles</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="AssignRole" class="dropdown-item">Assign Role</a></li>
+                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="CreateRole" class="dropdown-item">Create Role</a></li>
+                                    </ul>
+                                </li>
+                                <!-- End Level two -->
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- SEARCH FORM -->
