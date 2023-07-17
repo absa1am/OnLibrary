@@ -65,5 +65,46 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var model = _scope.Resolve<UpdateBookModel>();
+
+            model.Load(id);
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UpdateBookModel model)
+        {
+            model.ResolveDependency(_scope);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.UpdateBook();
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Book updated to the database.",
+                        Type = ResponseType.Success
+                    });
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Unable to update Book.");
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Unable to update Book.",
+                        Type = ResponseType.Danger
+                    });
+                }
+            }
+
+            return View(model);
+        }
     }
 }

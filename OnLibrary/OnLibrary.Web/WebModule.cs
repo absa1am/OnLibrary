@@ -20,6 +20,7 @@ namespace OnLibrary.Web
 
             // Book
             builder.RegisterType<CreateBookModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<UpdateBookModel>().AsSelf().InstancePerLifetimeScope();
         }
     }
 }

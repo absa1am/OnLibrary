@@ -26,5 +26,22 @@ namespace OnLibrary.Infrastructure.Features.Books.Services
             _unitOfWork.Books.Add(book);
             _unitOfWork.Save();
         }
+
+        public Book GetBooks(Guid id)
+        {
+            return _unitOfWork.Books.Get(id);
+        }
+
+        public void UpdateBook(Guid id, string title, string author, string publication, string genre)
+        {
+            var book = _unitOfWork.Books.Get(id);
+
+            book.Title = title;
+            book.Author = author;
+            book.Publication = publication;
+            book.Genre = genre;
+
+            _unitOfWork.Save();
+        }
     }
 }

@@ -32,6 +32,9 @@ try
         containerBuilder.RegisterModule(new WebModule());
     });
 
+    // Automapper configuration
+    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
     // Add services to the container.
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
