@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnLibrary.Web.Areas.Admin.Models.Books;
+using OnLibrary.Web.Models;
+using OnLibrary.Web.TempData;
 
 namespace OnLibrary.Web.Areas.Admin.Controllers
 {
@@ -26,6 +28,40 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Create()
         {
             var model = _scope.Resolve<CreateBookModel>();
+
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateBookModel model)
+        {
+            model.ResolveDependency(_scope);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.CreateBook();
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Book created to the database.",
+                        Type = ResponseType.Success
+                    });
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Unable to create Book.");
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel
+                    {
+                        Message = "Unable to create Book.",
+                        Type = ResponseType.Danger
+                    });
+                }
+            }
 
             return View(model);
         }

@@ -1,6 +1,9 @@
-﻿namespace OnLibrary.Application.Features.Books.Repositories
+﻿using OnLibrary.Domain.Entities;
+using OnLibrary.Domain.Repositories;
+
+namespace OnLibrary.Application.Features.Books.Repositories
 {
-    public interface IBookRepository
+    public interface IBookRepository : IRepositoryBase<Book, Guid>
     {
     }
 }
