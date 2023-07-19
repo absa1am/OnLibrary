@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OnLibrary.Infrastructure;
 using OnLibrary.Web.Areas.Admin.Models.Books;
 using OnLibrary.Web.Models;
 using OnLibrary.Web.TempData;
@@ -21,7 +22,18 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<ViewBookModel>();
+
+            return View(model);
+        }
+
+        public async Task<JsonResult> GetBooks()
+        {
+            var dataTables = new DataAjaxRequest(Request);
+            var model = _scope.Resolve<ViewBookModel>();
+            var data = await model.GetPagedBooksAsync(dataTables);
+
+            return Json(data);
         }
 
         [HttpGet]
@@ -91,6 +103,8 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
                         Message = "Book updated to the database.",
                         Type = ResponseType.Success
                     });
+
+                    return RedirectToAction("Index");
                 }
                 catch (Exception e)
                 {
@@ -105,6 +119,39 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Delete(Guid id)
+        {
+            var model = _scope.Resolve<ViewBookModel>();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.DeleteBook(id);
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel()
+                    {
+                        Message = "Book deleted from database.",
+                        Type = ResponseType.Success
+                    });
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, e.Message);
+
+                    TempData.Put<ResponseModel>("Message", new ResponseModel()
+                    {
+                        Message = "Unable to delete book",
+                        Type = ResponseType.Danger
+                    });
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

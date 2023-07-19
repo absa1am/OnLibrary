@@ -22,10 +22,9 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <partial name="_ResponseSweetAlertPartial" />
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="books" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>SL. No.</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Publication</th>
@@ -33,17 +32,9 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>123456</td>
-                                    <td>Eleanor and Park</td>
-                                    <td>Rainbow Rowell</td>
-                                    <td>Rainbow</td>
-                                    <td>Novel</td>
-                                    <td>Read | Edit | Delete</td>
-                                </tr>
-                            </tbody>
+
                         </table>
+                        <partial name="_ModalPartial" />
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -65,14 +56,44 @@
     <!-- Page specific script -->
     <script>
         $(function () {
-            $('#example1').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+            $("#books").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/Admin/Book/GetBooks",
+                },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 4,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/Admin/Book/Update/${data}'" value='${data}'>
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Edit
+                                    </button>
+                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                        <i class="fas fa-trash"></i>
+                                        Delete
+                                    </button>`;
+                        }
+                    }
+                ]
+            });
+
+            $('#books').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data('id');
+                var modal = $('#modal-default');
+
+                modal.find('.modal-body p').text('Are you want to delete this book ?');
+
+                $('#deleteId').val(id);
+                $('#deleteForm').attr('action', "/Admin/Book/Delete");
+
+                modal.modal('show');
+            });
+
+            $('#deleteButton').click(function () {
+                $('#deleteForm').submit();
             });
         });
     </script>
