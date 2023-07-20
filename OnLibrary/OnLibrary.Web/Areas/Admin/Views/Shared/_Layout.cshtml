@@ -1,8 +1,10 @@
-﻿<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+﻿@using Microsoft.AspNetCore.Identity
+@using OnLibrary.Persistence.Features.Membership
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -73,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </ul>
 
                     <!-- SEARCH FORM -->
-                    @*<form class="form-inline ml-0 ml-md-3">
+                    <form class="form-inline ml-0 ml-md-3">
                         <div class="input-group input-group-sm">
                             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
@@ -82,9 +84,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </button>
                             </div>
                         </div>
-                    </form>*@
+                    </form>
 
-                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form class="form-inline" asp-antiforgery="true" asp-area="" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+
                 </div>
 
                 <!-- Right navbar links -->
