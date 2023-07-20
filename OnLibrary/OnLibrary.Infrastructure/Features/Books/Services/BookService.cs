@@ -40,7 +40,7 @@ namespace OnLibrary.Infrastructure.Features.Books.Services
 
         public async Task<(IList<Book> records, int total, int totalDisplay)> GetPagedBooksAsync(int pageIndex, int pageSize, string searchText, string orderBy)
         {
-            var data = await _unitOfWork.Books.GetTableDataAsync(b => b.Title.Contains(searchText) || b.Author.Contains(searchText) || b.Publication.Contains(searchText) || b.Genre.Contains(searchText), orderBy, pageIndex, pageSize);
+            var data = await _unitOfWork.Books.GetTableDataAsync(b => (b.Title.Contains(searchText) || b.Author.Contains(searchText) || b.Publication.Contains(searchText) || b.Genre.Contains(searchText)), orderBy, pageIndex, pageSize);
 
             return data;
         }
