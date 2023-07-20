@@ -36,7 +36,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             var model = _scope.Resolve<CreateBookModel>();
@@ -44,7 +44,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateBookModel model)
         {
             model.ResolveDependency(_scope);
@@ -78,6 +78,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(Guid id)
         {
             var model = _scope.Resolve<UpdateBookModel>();
@@ -87,7 +88,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(UpdateBookModel model)
         {
             model.ResolveDependency(_scope);
@@ -122,7 +123,7 @@ namespace OnLibrary.Web.Areas.Admin.Controllers
         }
 
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             var model = _scope.Resolve<ViewBookModel>();
