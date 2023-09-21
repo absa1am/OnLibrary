@@ -49,8 +49,9 @@ namespace OnLibrary.Web.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+                var roleResult = await _userManager.AddToRoleAsync(user, "User");
 
-                if (result.Succeeded)
+                if (result.Succeeded && roleResult.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
