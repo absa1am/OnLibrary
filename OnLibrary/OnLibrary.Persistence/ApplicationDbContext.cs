@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnLibrary.Domain.Entities;
 using OnLibrary.Persistence.Features.Membership;
+using OnLibrary.Persistence.Seeder;
 
 namespace OnLibrary.Persistence
 {
@@ -31,6 +32,10 @@ namespace OnLibrary.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>().HasData(UserSeed.Users());
+            builder.Entity<ApplicationRole>().HasData(RoleSeed.Roles());
+            builder.Entity<ApplicationUserRole>().HasData(UserRoleSeed.UserRole());
         }
 
         public DbSet<Book> Books { get; set; }
