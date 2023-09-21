@@ -49,7 +49,10 @@
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Books</a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a asp-area="Admin" asp-controller="Book" asp-action="Create" class="dropdown-item">Add a Book</a></li>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                {
+                                    <li><a asp-area="Admin" asp-controller="Book" asp-action="Create" class="dropdown-item">Add a Book</a></li>
+                                }
                                 <li><a asp-area="Admin" asp-controller="Book" asp-action="Index" class="dropdown-item">View Books</a></li>
                                 <!-- End Level two -->
                             </ul>
@@ -61,14 +64,18 @@
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <!-- End Level two -->
                                 <!-- Level two dropdown-->
-                                <li class="dropdown-submenu dropdown-hover">
-                                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Manage Role</a>
-                                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="Roles" class="dropdown-item">View Roles</a></li>
-                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="AssignRole" class="dropdown-item">Assign Role</a></li>
-                                        <li><a asp-area="Admin" asp-controller="Settings" asp-action="CreateRole" class="dropdown-item">Create Role</a></li>
-                                    </ul>
-                                </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="dropdown-submenu dropdown-hover">
+                                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Manage Role</a>
+                                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                            <li><a asp-area="Admin" asp-controller="Settings" asp-action="Roles" class="dropdown-item">View Roles</a></li>
+                                            <li><a asp-area="Admin" asp-controller="Settings" asp-action="AssignRole" class="dropdown-item">Assign Role</a></li>
+                                            <li><a asp-area="Admin" asp-controller="Settings" asp-action="CreateRole" class="dropdown-item">Create Role</a></li>
+                                        </ul>
+                                    </li>
+                                }
+                                <li><a href="#" class="dropdown-item">Account</a></li>
                                 <!-- End Level two -->
                             </ul>
                         </li>
