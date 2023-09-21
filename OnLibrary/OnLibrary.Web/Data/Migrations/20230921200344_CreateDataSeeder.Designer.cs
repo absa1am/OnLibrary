@@ -12,7 +12,7 @@ using OnLibrary.Persistence;
 namespace OnLibrary.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230921185746_CreateDataSeeder")]
+    [Migration("20230921200344_CreateDataSeeder")]
     partial class CreateDataSeeder
     {
         /// <inheritdoc />
@@ -83,17 +83,23 @@ namespace OnLibrary.Web.Data.Migrations
                         new
                         {
                             Id = new Guid("6505ec93-b8ee-418b-a3d7-13fc3e3ffc96"),
-                            Name = "Admin"
+                            ConcurrencyStamp = "6505EC93-B8EE-418B-A3D7-13FC3E3FFC96",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("459a979d-8358-4ebb-9758-d8aa35d7c7ff"),
-                            Name = "Manager"
+                            ConcurrencyStamp = "459A979D-8358-4EBB-9758-D8AA35D7C7FF",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = new Guid("0e7949b4-0a2b-43f7-9ddc-e8822a4b60c0"),
-                            Name = "User"
+                            ConcurrencyStamp = "0E7949B4-0A2B-43F7-9DDC-E8822A4B60C0",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -191,13 +197,13 @@ namespace OnLibrary.Web.Data.Migrations
                         {
                             Id = new Guid("e26967f0-ce4c-4c14-8a0b-45beb8c9eb48"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "759ab515-87b6-456b-8662-0d1a096d081f",
+                            ConcurrencyStamp = "4ee9d04c-f13e-4d75-abe4-7e57247c0031",
                             Email = "admin@onlibrary.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ONLIBRARY.COM",
                             NormalizedUserName = "ADMIN@ONLIBRARY.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDJkoybmVMh0gSurwDklCeJpb7wCBftLgldI3eFxHQzD1St2XqbHhsD7HdC0tuOH+A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEQqK4eUea3iiof2kuPl3+NDTjykuSpVxJwreilZq9d7HP1r2SFrnt9Q6LYKoRCFLQ==",
                             PhoneNumber = "+8801856817465",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "BFCC7B453A8B4B6C8A4C93EE28A3B4A8",
@@ -208,13 +214,13 @@ namespace OnLibrary.Web.Data.Migrations
                         {
                             Id = new Guid("5f4c76d3-79b0-4923-86a7-511ac60c2ab9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8b16313-8c4d-4c05-a09a-2ae351b901f8",
+                            ConcurrencyStamp = "80291039-b167-4c01-bbab-2b6cfaa66cf4",
                             Email = "manager@onlibrary.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "MANAGER@ONLIBRARY.COM",
                             NormalizedUserName = "MANAGER@ONLIBRARY.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIoUSDhLNAxg7aM1erjvYEI4/dVtYtlveYCVQJNTGXPrt5/1S2xVyFVBc+0yTpRKTg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGhMTmeSm0r/ZagGOuhUWDBkP/VSVjy2P/fkRYfY706k0Ys+U0aj7dLMQrw3+UM5EA==",
                             PhoneNumber = "+8801856817465",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "FC37C84E276C4D978DF9054129D0CB23",
